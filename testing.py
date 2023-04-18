@@ -1,5 +1,6 @@
 from tkinter import *
 from getpass import getpass
+from Face_Rec_lib import Pics, Model, Rec
 # Create object
 root = Tk()
 root.title('testing')
@@ -7,6 +8,9 @@ root.title('testing')
 root.geometry('800x480')
 root.config(bg='black')
 root.attributes('-fullscreen', True)
+
+idt = False
+
 
 def open():
     top = Tk()
@@ -32,6 +36,7 @@ def open():
 
 def scanning():
     print("scan tapped")
+    Rec(idt) 
 
 def passentry():
     userMod= Toplevel()
@@ -45,14 +50,27 @@ def newUser():
     adduser= Toplevel()
     adduser.geometry('800x480')
     adduser.title('Add New User')
+<<<<<<< Updated upstream
     adduser.config(bg= 'black')
+=======
+    Pics()
+    Model()
+>>>>>>> Stashed changes
 
 def removeUser():
     removeuser= Toplevel()
     removeuser.geometry('800x480')
     removeuser.title('Remove Existing User')
+<<<<<<< Updated upstream
     removeuser.config(bg= 'black')
 
+=======
+    
+#def lock():
+    #if(idt == True):
+        #Open()
+        
+>>>>>>> Stashed changes
 
 # Specify Grid
 Grid.rowconfigure(root,0,weight=1)
