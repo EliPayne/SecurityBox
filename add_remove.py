@@ -6,7 +6,7 @@ def Add(id,filename,path,db,):
     insertBLOB(id,path,db)
     
     
-def Remove(id,db_file):
+def Remove(db_file,id):
     delete(db_file,id)
     
     

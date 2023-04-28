@@ -88,12 +88,11 @@ def newUser():
 
 def removeUser():
     top = Tk()
-    removeuser= Toplevel()
-    removeuser.geometry('800x480')
-    removeuser.title('Remove Existing User')
-    removeuser.config(bg= 'black')
+    top.geometry('800x480')
+    top.title('New User Id')
+    top.config(bg= 'black')
     pswrd_entry = Entry(top, width=25, show="*").grid(row=0,column = 1,sticky="NSEW" )
-    pswrd_tempt = Button(top,width= 25,height=2,text="Enter", command = Remove(id,'facebase.db')).grid(row=1,column = 1,sticky="NSEW")
+    pswrd_tempt = Button(top,width= 25,height=2,text="Enter", command = Remove('facebase.db',id)).grid(row=1,column = 1,sticky="NSEW")
     cls_btn = Button(top,text="Home",width=5,height=2, command= top.destroy).grid(row=0,column = 0,sticky="NSEW")
     numOne_btn =Button(top,text= "1",height=3,width=3,command= lambda:print("tapped 1")).grid(row=2,column = 2)
     numTwo_btn =Button(top,text= "2",height=3,width=3,command= lambda:print("tapped 2")).grid(row=2,column = 3)

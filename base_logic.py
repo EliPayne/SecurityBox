@@ -138,18 +138,26 @@ def readDB(db_file, empid):
             print("\n db is closed")
             
 def delete(db_file,id):
-    conn = sqlite3.connect(db_file)
-    """
-    Delete a task by task empid
-    :param conn: Connection to the SQLite database
-    :param id: id of the task
-    :return:
-    """
-    sql = 'DELETE FROM tasks WHERE id=?'
-    cur = conn.cursor()
-    cur.execute(sql, (id,))
-    conn.commit()
-        
+    try:
+        db = create_connection(db_file)
+        if(db is not None):
+            """
+            Delete a task by task empid
+            :param conn: Connection to the SQLite database
+            :param id: id of the task
+            :return:
+            """
+            sql = 'DELETE FROM new_employee WHERE id=?'
+            cur = db.cursor()
+            cur.execute(sql, (id,))
+            db.commit()
+    except:
+        print("\n error deleting user!")
+    #close db
+    finally:
+        if(db):
+            db.close()
+            print("\n db is closed")
 
 
 
