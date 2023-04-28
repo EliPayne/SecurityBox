@@ -1,11 +1,13 @@
 import cv2
 from imutils import paths
+from base_logic import create_connection, create_table, convertToBinaryData, insertBLOB, insert_DB, writeTofile, readBlob, readDB
 import face_recognition
 import pickle
 import os
 import imutils
 from imutils.video import VideoStream
 from imutils.video import FPS
+from add_remove import Add, Remove
 import time
 
 #cam = cv2.VideoCapture(0)
@@ -13,13 +15,13 @@ import time
 #cv2.setWindowProperty('web cam', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 
-def Pics():
-    name = 'Elijah' #replace with your name
+def Pics(id,db):
+    id = 'Elijah' #replace with your name
 
     cam = cv2.VideoCapture(0)
     
     cv2.namedWindow("press space to take a photo", cv2.WINDOW_NORMAL)
-    cv2.resizeWindow("press space to take a photo", 500, 300)
+    #cv2.resizeWindow("press space to take a photo", 500, 300)
     cv2.setWindowProperty("press space to take a photo", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     img_counter = 0
@@ -38,13 +40,14 @@ def Pics():
             break
         elif k%256 == 32:
             # SPACE pressed
-            img_name = "dataset/"+ name +"/image_{}.jpg".format(img_counter)
+            img_name = "dataset/"+ id +"/image_{}.jpg".format(img_counter)
             cv2.imwrite(img_name, frame)
             print("{} written!".format(img_name))
             img_counter += 1
+            Add(id,img_name,db)
 
     cam.release()
-
+ 
     cv2.destroyAllWindows()
     
     
