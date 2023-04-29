@@ -67,7 +67,6 @@ class App(Frame):
         self.textEntryVar1 = StringVar()
         self.e1 = NumpadEntry(self,textvariable=self.textEntryVar1)
         self.e1.grid()
-        return StringVar()
 
         #self.textEntryVar2 = StringVar()
         #self.e2 = NumpadEntry(self,textvariable=self.textEntryVar2)

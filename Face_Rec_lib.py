@@ -17,13 +17,13 @@ import time
 #cv2.setWindowProperty('web cam', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 
-def Pics():
+def Pics(id):
     root = 'dataset'
-    id = input("User Id: ")
     list = id.split(",")
     for i in list:
         path = os.path.join(root, i)
         os.mkdir(path)
+    
     cam = cv2.VideoCapture(0)
     
     cv2.namedWindow("press space to take a photo", cv2.WINDOW_NORMAL)

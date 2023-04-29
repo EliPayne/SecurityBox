@@ -24,7 +24,7 @@ root.config(bg='black')
 root.attributes('-fullscreen', True)
 #db = create_connection('facebase.db')
 id = 0
-passcode = 1010
+passcode = "1010"
 #VideoStream(src=0,framerate=10).start()
 #insert_DB('facebase.db')
 
@@ -32,14 +32,27 @@ idt = False
 
 
 def open():
-    root = Tk()
-    root.title('Admin')
-    root.geometry('800x480')
-    root.config(bg = 'black')
-    app = App(root)
-    app.grid()
-    root.mainloop()
-
+    master_window = Tk()
+    master_window.geometry("300x300")
+    master_window.title("StringVar get() example")
+ 
+    def print_data():
+        var = string_variable.get()
+        print(string_variable.get())
+        if var == "1010":
+            passentry()
+            master_window.destroy()
+ 
+    string_variable = StringVar(master_window)
+ 
+    label = Label(master_window, text="Passcode: ")
+    label.grid(row=0, column=0)
+ 
+    entry = Entry(master_window, textvariable=string_variable)
+    entry.grid(row=0, column=1)
+    NumpadEntry(entry)
+    button = Button(master_window, text="Enter", command=print_data)
+    button.grid(row=1, column=0, columnspan=2)
 
 def scanning():
     print("scan tapped")
@@ -54,58 +67,74 @@ def passentry():
     removeUser_btn = Button(userMod,text="Remove User",height=25,width=40, command= removeUser).grid(row=1,column = 1,sticky="NSEW")
 
 def newUser():
-    top = Tk()
-    top.geometry('800x480')
-    top.title('New User Id')
-    top.config(bg= 'black')
-    #id = int(input())
-    pswrd_entry = Entry(top, width=25, show="*").grid(row=0,column = 1,sticky="NSEW" )
-    pswrd_tempt = Button(top,width= 25,height=2,text="Enter", command = passentry).grid(row=1,column = 1,sticky="NSEW")
-    cls_btn = Button(top,text="Home",width=5,height=2, command= top.destroy).grid(row=0,column = 0,sticky="NSEW")
-    numOne_btn =Button(top,text= "1",height=3,width=3,command= lambda:print("tapped 1")).grid(row=2,column = 2)
-    numTwo_btn =Button(top,text= "2",height=3,width=3,command= lambda:print("tapped 2")).grid(row=2,column = 3)
-    numThree_btn =Button(top,text= "3",height=3,width=3,command= lambda:print("tapped 3")).grid(row=2,column = 4)
-    numFour_btn =Button(top,text= "4",height=3,width=3,command= lambda:print("tapped 4")).grid(row=3,column = 2)
-    numFive_btn =Button(top,text= "5",height=3,width=3,command= lambda:print("tapped 5")).grid(row=3,column = 3)
-    numtSix_btn =Button(top,text= "6",height=3,width=3,command= lambda:print("tapped 6")).grid(row=3,column = 4)
-    numSeven_btn =Button(top,text= "7",height=3,width=3,command= lambda:print("tapped 7")).grid(row=4,column = 2)
-    numEight_btn =Button(top,text= "8",height=3,width=3,command= lambda:print("tapped 8")).grid(row=4,column = 3)
-    numNine_btn =Button(top,text= "9",height=3,width=3,command= lambda:print("tapped 9")).grid(row=4,column = 4)
-    numSeven_btn =Button(top,text= "*",height=3,width=3,command= lambda:print("tapped *")).grid(row=5,column = 2)
-    numEight_btn =Button(top,text= "0",height=3,width=3,command= lambda:print("tapped 0")).grid(row=5,column = 3)
-    numNine_btn =Button(top,text= "#",height=3,width=3,command= lambda:print("tapped #")).grid(row=5,column = 4)
-    Pics()
+    master_window = Tk()
+    master_window.geometry("300x300")
+    master_window.title("StringVar get() example")
+ 
+    def print_data():
+        id = string_variable.get()
+        Pics(id)
+        Model()
+        master_window.destroy()
+ 
+    string_variable = StringVar(master_window)
+ 
+    label = Label(master_window, text="New User ID: ")
+    label.grid(row=0, column=0)
+ 
+    entry = Entry(master_window, textvariable=string_variable)
+    entry.grid(row=0, column=1)
+ 
+    button = Button(master_window, text="enter", command=print_data)
+    button.grid(row=1, column=0, columnspan=2)
+    #Pics()
     #Model()
     
 
 def removeUser():
-    top = Tk()
-    top.geometry('800x480')
-    top.title('New User Id')
-    top.config(bg= 'black')
-    root = 'dataset'
-    id = input("Enter the id of User to remove: ")
-    list = id.split(",")
-    for i in list:
-        path = os.path.join(root, i)
-        shutil.rmtree(path)
-    pswrd_entry = Entry(top, width=25, show="*").grid(row=0,column = 1,sticky="NSEW" )
-    pswrd_tempt = Button(top,width= 25,height=2,text="Enter", command = passentry).grid(row=1,column = 1,sticky="NSEW")
-    cls_btn = Button(top,text="Home",width=5,height=2, command= top.destroy).grid(row=0,column = 0,sticky="NSEW")
-    numOne_btn =Button(top,text= "1",height=3,width=3,command= lambda:print("tapped 1")).grid(row=2,column = 2)
-    numTwo_btn =Button(top,text= "2",height=3,width=3,command= lambda:print("tapped 2")).grid(row=2,column = 3)
-    numThree_btn =Button(top,text= "3",height=3,width=3,command= lambda:print("tapped 3")).grid(row=2,column = 4)
-    numFour_btn =Button(top,text= "4",height=3,width=3,command= lambda:print("tapped 4")).grid(row=3,column = 2)
-    numFive_btn =Button(top,text= "5",height=3,width=3,command= lambda:print("tapped 5")).grid(row=3,column = 3)
-    numtSix_btn =Button(top,text= "6",height=3,width=3,command= lambda:print("tapped 6")).grid(row=3,column = 4)
-    numSeven_btn =Button(top,text= "7",height=3,width=3,command= lambda:print("tapped 7")).grid(row=4,column = 2)
-    numEight_btn =Button(top,text= "8",height=3,width=3,command= lambda:print("tapped 8")).grid(row=4,column = 3)
-    numNine_btn =Button(top,text= "9",height=3,width=3,command= lambda:print("tapped 9")).grid(row=4,column = 4)
-    numSeven_btn =Button(top,text= "*",height=3,width=3,command= lambda:print("tapped *")).grid(row=5,column = 2)
-    numEight_btn =Button(top,text= "0",height=3,width=3,command= lambda:print("tapped 0")).grid(row=5,column = 3)
-    numNine_btn =Button(top,text= "#",height=3,width=3,command= lambda:print("tapped #")).grid(row=5,column = 4)
+    master_window = Tk()
+    master_window.geometry("800x480")
+    master_window.config(bg='black')
+    master_window.title("StringVar get() example")
+ 
+    def print_data():
+        root = 'dataset'
+        id = string_variable.get()
+        list = id.split(",")
+        for i in list:
+            path = os.path.join(root, i)
+            shutil.rmtree(path)
+        master_window.destroy()
+        Model()
+        
+ 
+    string_variable = StringVar(master_window)
+ 
+    label = Label(master_window, text="New User ID: ")
+    label.grid(row=0, column=0)
+ 
+    entry = Entry(master_window, textvariable=string_variable)
+    entry.grid(row=0, column=1)
+ 
+    button = Button(master_window, text="enter", command=print_data)
+    button.grid(row=1, column=0, columnspan=2)
 
 
+def passcheck(var):
+    if var.get() == passcode:
+        passentry()
+        
+#def UserR():
+    #remove = Tk()
+    #label = Label(remove, text="User Removed")
+    #time.sleep(5)
+    #remove.destroy()
+    
+#def UserA():
+    #add = Tk()
+    #label = Label(add, text="User Added")
+    #time.sleep(5)
+    #add.destroy()
     
 #def lock():
     #if(idt == True):
