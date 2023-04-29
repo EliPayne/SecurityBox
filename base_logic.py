@@ -30,7 +30,7 @@ def create_table(conn, create_table_sql):
 
 def convertToBinaryData(filename): # this uses opencv functions to read image , imencode to encode to a png format and then to bytes
     image = cv2.imread(filename)
-    is_success,im_buf_arr = cv2.imencode(".jpg",image)
+    is_success,im_buf_arr = cv2.imencode(".png",image)
     byte_im = im_buf_arr.tobytes()
     return byte_im
 
@@ -38,11 +38,11 @@ def convertToBinaryData(filename): # this uses opencv functions to read image , 
 
 
 
-def insertBLOB(empid,name,path,db):
+def insertBLOB(empid,path,db):
     try:
-        sqlite_insert_blob_query = """INSERT INTO new_employee (id,name,photo) VALUES (?,?,?) """
+        sqlite_insert_blob_query = """INSERT INTO new_employee (id,photo) VALUES (?,?) """
         empphoto = convertToBinaryData(path) #convert to binary data
-        data_tuple = (empid,name,empphoto)
+        data_tuple = (empid,empphoto)
         cursor = db.cursor()
         cursor.execute(sqlite_insert_blob_query,data_tuple)
         db.commit()
@@ -59,7 +59,6 @@ def insert_DB(db_file):
         #create a query here, if table does not exist create it or if exist go to next step
         sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS new_employee(
                                         id integer PRIMARY KEY,
-                                        name text NOT NULL,
                                         photo BLOB NOT NULL
                                     )"""
         #create a database connection

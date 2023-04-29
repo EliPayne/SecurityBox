@@ -7,7 +7,7 @@ import os
 import imutils
 from imutils.video import VideoStream
 from imutils.video import FPS
-from add_remove import Add, Remove
+#from add_remove import Add, Remove
 import time
 
 #cam = cv2.VideoCapture(0)
@@ -15,9 +15,13 @@ import time
 #cv2.setWindowProperty('web cam', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 
-def Pics(id,db):
-    id = 'Elijah' #replace with your name
-
+def Pics():
+    root = 'dataset'
+    id = input("User Id: ")
+    list = id.split(",")
+    for i in list:
+        path = os.path.join(root, i)
+        os.mkdir(path)
     cam = cv2.VideoCapture(0)
     
     cv2.namedWindow("press space to take a photo", cv2.WINDOW_NORMAL)
@@ -40,11 +44,11 @@ def Pics(id,db):
             break
         elif k%256 == 32:
             # SPACE pressed
-            img_name = "dataset/"+ id +"/image_{}.jpg".format(img_counter)
+            img_name = "dataset/"+ id +"/image_{}.png".format(img_counter)
             cv2.imwrite(img_name, frame)
             print("{} written!".format(img_name))
             img_counter += 1
-            Add(id,img_name,db)
+            #Add(id,img_name,db)
 
     cam.release()
  

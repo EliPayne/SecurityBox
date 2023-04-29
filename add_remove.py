@@ -1,9 +1,7 @@
-from base_logic import create_connection, convertToBinaryData, insertBLOB, writeTofile, readBlob, readDB, delete
+import os
 
-
-def Add(id,filename,path,db,):
-    convertToBinaryData(filename)
-    insertBLOB(id,path,db)
+def Add():
+    id = 
     
     
 def Remove(db_file,id):
