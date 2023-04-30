@@ -1,5 +1,6 @@
 import cv2
-import tkinter
+from tkinter import *
+from PIL import Image, ImageTk
 from imutils import paths
 import face_recognition
 import pickle
@@ -23,40 +24,39 @@ def Pics(id):
     for i in list:
         path = os.path.join(root, i)
         os.mkdir(path)
+    def destory():
+        mainWin.destroy()
+        cv2.destroyAllWindows()
+        
+        
+    mainWin = Tk()
+    mainWin.configure(bg= 'gray')
+    mainWin.geometry('800x480')
     
-    cam = cv2.VideoCapture(0)
+    mainFrame = Frame(mainWin)
+    mainFrame.place(x= 20, y= 20)
     
-    cv2.namedWindow("press space to take a photo", cv2.WINDOW_NORMAL)
-    #cv2.resizeWindow("press space to take a photo", 500, 300)
-    cv2.setWindowProperty("press space to take a photo", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-
-    img_counter = 0
-
-    while True:
-        ret, frame = cam.read()
-        if not ret:
-            print("failed to grab frame")
-            break
-        cv2.imshow("press space to take a photo", frame)
-
-        k = cv2.waitKey(1)
-        if k%256 == 27:
-            # ESC pressed
-            print("Escape hit, closing...")
-            break
-        elif k%256 == 32:
-            # SPACE pressed
-            img_name = "dataset/"+ id +"/image_{}.png".format(img_counter)
-            cv2.imwrite(img_name, frame)
-            print("{} written!".format(img_name))
-            img_counter += 1
-            #Add(id,img_name,db)
-
-    cam.release()
- 
-    cv2.destroyAllWindows()
+    lmain = Label(mainFrame)
+    lmain.grid(row=0, column=0)
     
+    cap = cv2.VideoCapture(0)
     
+    def show_frame():
+            ret, frame = cap.read()
+            
+            cv2image = cv2.cvtColor(frame, cv2.COLOR_BAYER_BG2BGR)
+            
+            img = Image.fromarray(cv2image)
+            imgtk = ImageTk.PhotoImage(image = img)
+            lmain.imgtk = imgtk
+            lmain.configure(image=imgtk)
+            lmain.after(10, show_frame)
+            
+    closeButton = Button(mainWin, text = "CLOSE", font = ('Bold',20), bg = 'white', width = 20, height= 1)
+    closeButton.configure(command= destory)              
+    closeButton.place(x=270,y=430)	
+    
+    show_frame()
     
     
 def Model():
