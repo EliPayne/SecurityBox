@@ -1,4 +1,5 @@
 import cv2
+from Snap import snap
 from tkinter import *
 from PIL import Image, ImageTk
 from imutils import paths
@@ -12,6 +13,7 @@ from imutils.video import VideoStream
 from imutils.video import FPS
 #from add_remove import Add, Remove
 import time
+import datetime
 
 #cam = cv2.VideoCapture(0)
 #cv2.namedWindow('cam',cv2.WINDOW_NORMAL)
@@ -19,45 +21,13 @@ import time
 
 
 def Pics(id):
-    root = 'dataset'
+    
+    base = 'dataset'
     list = id.split(",")
     for i in list:
-        path = os.path.join(root, i)
+        path = os.path.join(base, i)
         os.mkdir(path)
-    def destory():
-        mainWin.destroy()
-        cv2.destroyAllWindows()
-        
-        
-    mainWin = Tk()
-    mainWin.configure(bg= 'gray')
-    mainWin.geometry('800x480')
-    
-    mainFrame = Frame(mainWin)
-    mainFrame.place(x= 20, y= 20)
-    
-    lmain = Label(mainFrame)
-    lmain.grid(row=0, column=0)
-    
-    cap = cv2.VideoCapture(0)
-    
-    def show_frame():
-            ret, frame = cap.read()
-            
-            cv2image = cv2.cvtColor(frame, cv2.COLOR_BAYER_BG2BGR)
-            
-            img = Image.fromarray(cv2image)
-            imgtk = ImageTk.PhotoImage(image = img)
-            lmain.imgtk = imgtk
-            lmain.configure(image=imgtk)
-            lmain.after(10, show_frame)
-            
-    closeButton = Button(mainWin, text = "CLOSE", font = ('Bold',20), bg = 'white', width = 20, height= 1)
-    closeButton.configure(command= destory)              
-    closeButton.place(x=270,y=430)	
-    
-    show_frame()
-    
+    snap()
     
 def Model():
     # our images are located in the dataset folder

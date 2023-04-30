@@ -1,5 +1,6 @@
 from tkinter import *
 from NumPad import *
+from PIL import Image, ImageTk
 from getpass import getpass
 from Face_Rec_lib import Pics, Model, Rec
 from base_logic import create_connection, create_table, convertToBinaryData, insertBLOB, insert_DB
