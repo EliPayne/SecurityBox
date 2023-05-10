@@ -286,36 +286,7 @@ def passcheck(var):
     if var.get() == passcode:
         passentry()
         
-#def UserR():
-    #remove = Tk()
-    #label = Label(remove, text="User Removed")
-    #time.sleep(5)
-    #remove.destroy()
-    
-#def UserA():
-    #add = Tk()
-    #label = Label(add, text="User Added")
-    #time.sleep(5)
-    #add.destroy()
-    
-#def lock():
-    #if(idt == True):
-        #Open()
-        
-#def inser_number(number):
-    #dialer_entry.insert(tk.INSERT, number)
-    
-#def delNum():
-    #index = int(dialer_entry.index(tk.INSERT)) -1 
-    #dialer_entry.delete(index)
-    #print(index)
-    
-#def GetNum():
-    #num = dialer_entry.get()
-    #print(num)
-    
-#def Exit():
-    #root.destroy()
+
 
 # Specify Grid
 Grid.rowconfigure(root,0,weight=1)

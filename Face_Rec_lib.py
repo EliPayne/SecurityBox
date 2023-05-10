@@ -1,5 +1,5 @@
 import cv2
-from Snap import snap
+from Snap import *
 from tkinter import *
 from PIL import Image, ImageTk
 from imutils import paths
@@ -27,7 +27,69 @@ def Pics(id):
     for i in list:
         path = os.path.join(base, i)
         os.mkdir(path)
-    snap()
+        
+    root = Tk()
+    root.geometry('800x480')
+    root.tk_setPalette('gray')
+    
+    def snap():
+        img_name = "dataset/"+ id +"/image_{}.png".format(img_counter)
+        cv2.imwrite(img_name, frame)
+        print("{} written!".format(img_name))
+        img_counter += 1
+            
+    def exit():
+        root.destroy()
+        cam.release()
+        cv2.destroyAllWindows()
+     
+    Capture_frame = Frame(root)
+    Capture_frame.pack()   
+    mainloop()
+    
+    
+    
+    Cap_btn = Button(Capture_frame, text = "Take Picture", font=('Bold',20),bd=0, command=snap)
+    Cap_btn.place(x=100, y=5 , width=100, height=70)
+    
+    Cls_btn = Button(Capture_frame, text = 'Close', font=('Bold',20),bd=0, command=exit)
+    Cls_btn.place(x=125, y=5, width=100, height=100)
+    
+        
+    cam = cv2.VideoCapture(0)
+    
+    cv2.namedWindow("press space to take a photo", cv2.WINDOW_NORMAL)
+    cv2.setWindowProperty("press space to take a photo",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
+
+    img_counter = 0
+
+    while True:
+        ret, frame = cam.read()
+        if not ret:
+            print("failed to grab frame")
+            break
+        cv2.imshow("press space to take a photo", frame)
+
+        k = cv2.waitKey(1)
+        if k%256 == 27:
+            # ESC pressed
+            print("Escape hit, closing...")
+            break
+        elif k%256 == 32:
+            # SPACE pressed
+            img_name = "dataset/"+ id +"/image_{}.png".format(img_counter)
+            cv2.imwrite(img_name, frame)
+            print("{} written!".format(img_name))
+            img_counter += 1
+            #Add(id,img_name,db)
+
+    Capture_frame.pack_propagate(False)
+    Capture_frame.configure(width=100,height=100)
+    
+    cam.release()
+ 
+    cv2.destroyAllWindows()
+    
     
 def Model():
     # our images are located in the dataset folder
